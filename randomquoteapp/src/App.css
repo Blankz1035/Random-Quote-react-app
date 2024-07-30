@@ -109,3 +109,29 @@
   width: 75%;
   height: 100%;
 }
+
+
+/* progress indicator for user to know how many requests they have left  */
+.progress-bar-container {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+}
+
+.progress-bar {
+  height: 20px;
+  width: 100%;
+  background-color: #4caf50; /* Color for progress */
+  transition: width 0.3s ease;
+}
+
+.warning {
+  background-color: #ff9800; /* Warning color */
+}
+
+.danger {
+  background-color: #f44336; /* Danger color */
+}

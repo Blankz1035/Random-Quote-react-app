@@ -6,9 +6,21 @@ function App() {
   const [showQuote, setShowQuote] = useState(false);
   const [selectedMode, setMode] = useState("random")
   const [imageSrc, setImageSrc] = useState(null);
-
+  const [requestCount, setRequestCount] = useState(0);
   
   useEffect(() => {
+        if (requestCount === 5) {
+            const timer = setTimeout(() => {
+                setRequestCount(0);
+            }, 30000); // reset after 30 seconds
+
+            return () => clearTimeout(timer); // cleanup timeout
+        }
+    }, [requestCount]);
+  
+  useEffect(() => {
+    if (!handleRequest()) return;
+
     if (selectedMode !== "image"){
        fetchRandomQuote(); 
     }
@@ -49,6 +61,21 @@ function App() {
     setMode(mode);
   };
 
+  const handleRequest = () => {
+    console.log(requestCount)
+        if (requestCount < 5) {
+            setRequestCount(requestCount + 1);
+            return true
+        } else {
+            alert('Please wait 30 seconds before making more requests.');
+            return false
+        }
+    };
+
+     // Calculate progress bar color
+    const progressBarClass = requestCount >= 4 ? 'danger' : (requestCount >= 3 ? 'warning' : '');
+
+
   return (
     <div className="app-container">
         <div className="mode-container">
@@ -72,6 +99,12 @@ function App() {
                 >
                     <span>Image and Quote</span>
                 </button>
+            </div>
+            <div className="progress-bar-container">
+          <div
+            className={`progress-bar ${progressBarClass}`}
+            style={{ width: `${requestCount * 20}%` }}
+          />
             </div>
         </div>
         <div className="quote-container">

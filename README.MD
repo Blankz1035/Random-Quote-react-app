@@ -8,6 +8,9 @@ Users can switch between different modes (Random, Today's Quote, and Image and Q
 
 Updates to come will include user profile handling with quote records with a RDMS system (eg. postgressql) to be deployed.
 
+**Key Detail:** 
+*To save on API limits, the app will utilize the **/quotes** endpoint to get 50 random quotes. Once the user has randomly viewed all 50, a new API request is done to gather a new block.* 
+
 ## Features
 
 - **Display Random Quotes:** Fetch and display random quotes from an external API.

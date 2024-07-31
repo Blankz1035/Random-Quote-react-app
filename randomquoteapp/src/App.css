@@ -82,6 +82,7 @@
 /* Container for the quote text */
 .quote-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -94,13 +95,14 @@
   color: #333;
   margin: 0;
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 3s;
 }
 
 .quote-text.show, .quote-image.show {
   opacity: 1;
 }
-.quote-text.hide {
+
+.quote-text.hide, .quote-image.hide {
   opacity: 0;
 }
 
@@ -111,6 +113,22 @@
   height: 90%;
 }
 
+.quote-author {
+  font-size: 1.2em;
+  color: #666;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 4s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+}
 
 /* progress indicator for user to know how many requests they have left  */
 .progress-bar-container {

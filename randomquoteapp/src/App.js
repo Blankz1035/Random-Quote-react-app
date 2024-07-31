@@ -110,18 +110,19 @@ function App() {
 
   const handleModeChange = (mode) => {
     setShowQuote(false); // remove quote view
-    setMode(mode); // update mode for api
+    setTimeout(() => {
+        setMode(mode); // update mode for api
+        if (mode === "today") {
+        if (handleRequest(mode)) fetchTodaysQuotes(mode);
+        return;
+        }
 
-    if (mode === "today") {
-      if (handleRequest(mode)) fetchTodaysQuotes(mode);
-      return;
-    }
-
-    if (mode === "random") {
-      fetchRandomQuote();
-      return;
-    }
-    if (handleRequest(mode)) fetchImageQuote(mode);
+        if (mode === "random") {
+        fetchRandomQuote();
+        return;
+        }
+        if (handleRequest(mode)) fetchImageQuote(mode);
+    }, 1000);
   };
 
   const handleRequest = (mode) => {
@@ -179,9 +180,14 @@ function App() {
             alt="Random Quote"
           />
         ) : (
-          <p className={`quote-text ${showQuote ? 'show' : 'hide'}`}>
-            {quote.q || "Oops. Looks like the quote didn't come back. Sorry about that. Please try again."}
-          </p>
+            <>
+            <p className={`quote-text ${showQuote ? 'show' : 'hide'}`}>
+              {quote.q || "Oops. Looks like the quote didn't come back. Sorry about that. Please try again."}
+            </p>
+            <p className={`quote-author ${showQuote ? 'show' : 'hide'}`}>
+              - {quote.a || "Unknown"}
+            </p>
+          </>
         )}
       </div>
       <small className='text-center'>
